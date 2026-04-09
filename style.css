@@ -97,12 +97,15 @@ h3 {
 }
 
 .stats-line {
-    grid-column: span 2;
+    width: 100%;
+    max-width: 400px;
     display: flex;
     justify-content: space-between;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     color: #00e676;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     border-bottom: 1px dashed rgba(0, 230, 118, 0.2);
-    padding-bottom: 5px;
+    padding: 5px 10px;
+    box-sizing: border-box;
+    opacity: 0.7;
 }

@@ -4,18 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>ZEN_TERMINAL</title>
-    
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="style.css">
-    
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="theme-color" content="#000000">
 </head>
 <body>
     <div class="stats-line">
-        <span id="battery-status">BATT: LOADING...</span>
-        <span id="weather-status">WX: FETCHING...</span>
+        <span id="battery-status">BATT: --%</span>
+        <span id="weather-status">WX: LOADING...</span>
     </div>
+
     <div class="container">
         <div class="status">> OS_KERNEL: ONLINE</div>
         <div class="status">> USER: PYTHON_DEV_RESERVE</div>
@@ -34,10 +33,10 @@
         <a href="https://www.facebook.com" class="cmd">FACEBOOK</a>
 
         <a href="viber://chats" class="cmd">VIBER</a>
-        <a href="intent://github.com#Intent;scheme=https;package=com.github.android;end" class="cmd">GITHUB_APP</a>
+        <a href="intent://github.com#Intent;scheme=https;package=com.github.android;S.browser_fallback_url=https://github.com;end" class="cmd">GITHUB_APP</a>
 
         <a href="intent:#Intent;action=android.settings.INTERNAL_STORAGE_SETTINGS;end" class="cmd">STORAGE</a>
-        <a href="intent:#Intent;action=android.settings.SETTINGS;end" class="cmd full-width" class="cmd">SYSTEM_SETTINGS</a>
+        <a href="intent:#Intent;action=android.settings.SETTINGS;end" class="cmd full-width">SYSTEM_SETTINGS</a>
 
         <a href="tel:" class="cmd">VOICE_CALL</a>
         <a href="sms:" class="cmd">SMS_DATA</a>
