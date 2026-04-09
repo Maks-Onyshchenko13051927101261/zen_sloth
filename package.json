@@ -1,0 +1,26 @@
+{
+  "name": "zen_sloth",
+  "version": "1.0.0",
+  "description": "",
+  "main": "sw.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "python sloth/main.py",
+    "terminal": "npx serve ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Maks-Onyshchenko13051927101261/zen_terminal.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Maks-Onyshchenko13051927101261/zen_terminal/issues"
+  },
+  "homepage": "https://github.com/Maks-Onyshchenko13051927101261/zen_terminal#readme",
+  "devDependencies": {
+    "eslint-config-zen-dev": "file:../../dev/zen-dev"
+  }
+}
