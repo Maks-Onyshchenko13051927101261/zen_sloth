@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>ZEN_TERMINAL</title>
+    
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="style.css">
+    
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#000000">
+</head>
+<body>
+
+    <div class="container">
+        <div class="status">> OS_KERNEL: ONLINE</div>
+        <div class="status">> USER: PYTHON_DEV_RESERVE</div>
+        
+        <div id="clock">00:00:00</div>
+
+        <h3>>_ SYSTEM_READY</h3>
+        
+        <a href="https://google.com" class="cmd">BROWSER</a>
+        <a href="https://www.notion.so" class="cmd">NOTION</a>
+
+        <a href="intent://www.youtube.com/feed/subscriptions#Intent;scheme=https;package=com.google.android.youtube;end" class="cmd">YOUTUBE</a>
+        <a href="intent://web.telegram.org#Intent;scheme=https;package=com.android.chrome;end" class="cmd">TELEGRAM</a>
+
+        <a href="https://www.instagram.com" class="cmd">INSTAGRAM</a>
+        <a href="https://www.facebook.com" class="cmd">FACEBOOK</a>
+
+        <a href="viber://chats" class="cmd">VIBER</a>
+        <a href="intent:#Intent;action=android.settings.INTERNAL_STORAGE_SETTINGS;end" class="cmd">STORAGE</a>
+        
+        <a href="intent:#Intent;action=android.settings.SETTINGS;end" class="cmd full-width">SYSTEM_SETTINGS</a>
+
+        <a href="tel:" class="cmd">VOICE_CALL</a>
+        <a href="sms:" class="cmd">SMS_DATA</a>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
