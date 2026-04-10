@@ -22,23 +22,35 @@
         
         <div id="clock">00:00:00</div>
 
+        <div id="stats-panel" style="font-family: monospace; color: #00ff00; padding: 10px; border: 1px solid #00ff00; margin-bottom: 10px;">
+            <div>[ STORAGE MONITOR ]</div>
+            <div>-------------------</div>
+            <div>PROGRESS: [<span id="progress-bar">----------</span>] <span id="percent-val">0</span>%</div>
+            <div>TOTAL:    <span id="total-val">0</span> GB</div>
+            <div>FREE:     <span id="free-val">0</span> GB</div>
+            <div>-------------------</div>
+        </div>
+
         <h3>>_ SYSTEM_READY</h3>
         
         <a href="https://google.com" class="cmd">BROWSER</a>
+
         <a href="https://www.notion.so" class="cmd">NOTION</a>
 
         <a href="intent://www.youtube.com/feed/subscriptions#Intent;scheme=https;package=com.google.android.youtube;end" class="cmd">YOUTUBE</a>
+
         <a href="intent://web.telegram.org#Intent;scheme=https;package=com.android.chrome;end" class="cmd">TELEGRAM</a>
 
         <a href="https://www.instagram.com" class="cmd">INSTAGRAM</a>
+
         <a href="https://www.facebook.com" class="cmd">FACEBOOK</a>
 
         <a href="viber://chats" class="cmd">VIBER</a>
-        <a href="intent:#Intent;action=android.settings.INTERNAL_STORAGE_SETTINGS;end" class="cmd">STORAGE</a>
         
-        <a href="intent:#Intent;action=android.settings.SETTINGS;end" class="cmd full-width">SYSTEM_SETTINGS</a>
+        <a href="intent:#Intent;action=android.settings.SETTINGS;end" class="cmd">SYSTEM_SETTINGS</a>
 
         <a href="tel:" class="cmd">VOICE_CALL</a>
+
         <a href="sms:" class="cmd">SMS_DATA</a>
     </div>
 

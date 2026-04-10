@@ -16,6 +16,16 @@ def get_safe_path(filename: str):
         raise HTTPException(status_code=403, detail="Доступ заборонено: спроба виходу за межі сховища");
     return target_path;
 
+@app.get("/system/storage")
+async def get_storage_info():
+    total, used, free = shutil.disk_usage(BASE_DIR)
+    return {
+        "total": round(total / (2**30), 2),
+        "used": round(used / (2**30), 2),
+        "free": round(free / (2**30), 2),
+        "percent": round((used / total) * 100, 1)
+    }
+
 #Повертає список файлів у папці storage
 @app.get("/files")
 async def list_files():

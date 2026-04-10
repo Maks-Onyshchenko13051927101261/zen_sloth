@@ -1,7 +1,7 @@
 async function checkServerStatus() {
     const statusElement = document.getElementById("status-line");
     try{
-        const statusElement = await fetch("http://localhost:8000/status");
+        const statusElement = await fetch("http://192.168.137.110:8000/status");
         const data = await response.json();
 
         if (data.status === "Vibing" || data.system === "ZEN_SLOTH") {
@@ -75,3 +75,31 @@ window.onload = () => {
 // Оновлюємо погоду кожні 15 хвилин
     setInterval(updateWeather, 900000);
 }
+
+const SERVER_IP = "192.168.137.110:8000"; // IP
+
+async function updateStorageStats() {
+    try {
+        const response = await fetch(`http://${SERVER_IP}/system/storage`);
+        const data = await response.json();
+
+        // Оновлюємо текст
+        document.getElementById('total-val').innerText = data.total;
+        document.getElementById('free-val').innerText = data.free;
+        document.getElementById('percent-val').innerText = data.percent;
+
+        // Малюємо прогрес-бар
+        const barSize = 10; // кількість символів у смузі
+        const filledSize = Math.round((data.percent / 100) * barSize);
+        const barText = "#".repeat(filledSize) + "-".repeat(barSize - filledSize);
+        document.getElementById('progress-bar').innerText = barText;
+
+    } catch (error) {
+        console.error("Помилка зв'язку зі сховищем:", error);
+    }
+}
+
+// Оновлювати кожні 10 секунд
+setInterval(updateStorageStats, 10000);
+// Перший запуск відразу
+updateStorageStats();
