@@ -33,7 +33,7 @@ body::after {
     flex-direction: column;
     gap: 15px;
     z-index: 5;
-    padding-right: 15px;
+    padding: 10px;
     box-sizing: border-box;
 }
 
