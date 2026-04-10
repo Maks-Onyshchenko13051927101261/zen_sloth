@@ -44,6 +44,18 @@ async def get_file(filename: str):
         raise HTTPException(status_code=404, detail="Файл не знайдено");
     return FileResponse(path=file_path, filename=filename);
 
+#Видаляє файл із нашої 'пісочниці'
+@app.delete("/file/{filename}")
+async def delete_file(filename: str):
+    file_path = get_safe_path(filename)
+    if not os.path.exists(file_path):
+        raise HTTPException(status_code=404, detail="Файл не знайдено для видалення")
+    try:
+        os.remove(file_path)
+        return {"message": f"Файл {filename} видалено", "status": "deleted"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Помилка при видаленні: {str(e)}")
+
 # Дозволяємо PWA звертатися до сервера
 app.add_middleware(
     CORSMiddleware,
