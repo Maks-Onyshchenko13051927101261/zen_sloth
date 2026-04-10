@@ -1,8 +1,30 @@
 import os;
 from fastapi import FastAPI;
 from fastapi.middleware.cors import CORSMiddleware;
+from fastapi import HTTPException
 
 app = FastAPI();
+BASE_DIR = os.path.abspath("./storage");
+if not os.path.exists(BASE_DIR):
+    os.makedirs(BASE_DIR);
+
+def get_safe_path(filename: str):
+    target_path = os.path.abspath(os.path.join(BASE_DIR, filename));
+    if not target_path.startswith(BASE_DIR):
+        raise HTTPException(status_code=403, detail="Доступ заборонено: спроба виходу за межі сховища");
+    return target_path;
+
+#Повертає список файлів у папці storage
+@app.get("/files")
+async def list_files():
+    try:
+        files = os.listdir(BASE_DIR);
+        return {
+            "count": len(files),
+            "files": files
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e));
 
 # Дозволяємо PWA звертатися до сервера
 app.add_middleware(
