@@ -28,11 +28,25 @@ body::after {
 
 .container { 
     width: 100%; 
-    max-width: 400px; 
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 12px;
+    max-height: 400px; 
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
     z-index: 5;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+/* Додай це, щоб посилання-команди виглядали як блоки */
+.cmd {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #00ff00;
+    text-decoration: none;
+    color: #00ff00;
+    background: rgba(0, 255, 0, 0.1);
 }
 
 #clock {
