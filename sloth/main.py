@@ -1,8 +1,7 @@
 from fastapi import FastAPI, HTTPException, File, UploadFile, BackgroundTasks, Header;
 from fastapi.middleware.cors import CORSMiddleware;
-import os, shutil;
-
 from sloth.core import Metadata, Storage, PluginManager, JobManager;
+import os, shutil;
 
 app = FastAPI(title="ZenSloth Micro-PaaS");
 
@@ -13,14 +12,21 @@ app.add_middleware(
     allow_headers=["*"],
 );
 
-BASE_DIR = os.path.abspath("./storage/files");
-storage = Storage(BASE_DIR);
-plugins = PluginManager("./plugins");
+BASE_PATH = os.path.dirname(os.path.dirname(__file__));
+
+STORAGE_DIR = os.path.join(BASE_PATH, "storage");
+FILES_DIR = os.path.join(STORAGE_DIR, "files");
+PLUGINS_DIR = os.path.join(BASE_PATH, "plugins");
+
+
+storage = Storage(FILES_DIR);
+plugins = PluginManager(PLUGINS_DIR);
 jobs = JobManager();
 
 STORAGE_STRUCTURE = ["files", "projects", "logs", "db"];
+
 for folder in STORAGE_STRUCTURE:
-    os.makedirs(os.path.join("./storage", folder), exist_ok=True);
+    os.makedirs(os.path.join(STORAGE_DIR, folder), exist_ok=True);
 
 @app.get("/")
 def root():
