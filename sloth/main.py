@@ -66,7 +66,7 @@ def run_job(job_name: str, background: BackgroundTasks):
 
 @app.get("/sync/map")
 def get_sync_map():
-    return Metadata.scan_storage(BASE_DIR)
+    return Metadata.scan_storage(FILES_DIR)
 
 @app.post("/sync/push")
 async def sync_push(
@@ -74,7 +74,7 @@ async def sync_push(
     rel_path: str = Header(...)
 ):
     from core.security import Security
-    target_path = Security.get_safe_path(BASE_DIR, rel_path)
+    target_path = Security.get_safe_path(FILES_DIR, rel_path)
     
     os.makedirs(os.path.dirname(target_path), exist_ok=True)
     
