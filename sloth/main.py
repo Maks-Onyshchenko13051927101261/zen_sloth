@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException, File, UploadFile, BackgroundTasks, Header;
 from fastapi.middleware.cors import CORSMiddleware;
-from sloth.core import Metadata, Storage, PluginManager, JobManager;
+from sloth.core import Metadata, Storage, PluginManager, JobManager, Security;
 import os, shutil;
 
 app = FastAPI(title="ZenSloth Micro-PaaS");
@@ -73,7 +73,6 @@ async def sync_push(
     file: UploadFile = File(...), 
     rel_path: str = Header(...)
 ):
-    from core.security import Security
     target_path = Security.get_safe_path(FILES_DIR, rel_path)
     
     os.makedirs(os.path.dirname(target_path), exist_ok=True)
