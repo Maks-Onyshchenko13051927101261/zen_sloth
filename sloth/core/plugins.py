@@ -2,7 +2,7 @@ import importlib;
 import sys;
 import os;
 import time;
-from core.Security import Security;
+from .security import Security;
 
 
 class PluginManager:

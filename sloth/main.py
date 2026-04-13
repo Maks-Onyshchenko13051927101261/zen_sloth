@@ -2,7 +2,7 @@ from fastapi import FastAPI, HTTPException, File, UploadFile, BackgroundTasks, H
 from fastapi.middleware.cors import CORSMiddleware;
 import os, shutil;
 
-from core import Metadata, Storage, PluginManager, JobManager;
+from sloth.core import Metadata, Storage, PluginManager, JobManager;
 
 app = FastAPI(title="ZenSloth Micro-PaaS");
 
@@ -76,3 +76,12 @@ async def sync_push(
         shutil.copyfileobj(file.file, buffer)
     
     return {"status": "synced", "path": rel_path};
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000);
+
+# Host	Що означає
+# 0.0.0.0	сервер слухає всі IP
+# 127.0.0.1	localhost
+# 192.168.x.x	твій телефон у мережі
