@@ -1,10 +1,8 @@
-from fastapi import FastAPI, HTTPException, File, UploadFile, BackgroundTasks;
+from fastapi import FastAPI, HTTPException, File, UploadFile, BackgroundTasks, Header;
 from fastapi.middleware.cors import CORSMiddleware;
 import os, shutil;
 
-from core.storage import Storage;
-from core.plugins import PluginManager;
-from core.jobs import JobManager; 
+from core import Metadata, Storage, PluginManager, JobManager;
 
 app = FastAPI(title="ZenSloth Micro-PaaS");
 
@@ -19,6 +17,10 @@ BASE_DIR = os.path.abspath("./storage/files");
 storage = Storage(BASE_DIR);
 plugins = PluginManager("./plugins");
 jobs = JobManager();
+
+STORAGE_STRUCTURE = ["files", "projects", "logs", "db"];
+for folder in STORAGE_STRUCTURE:
+    os.makedirs(os.path.join("./storage", folder), exist_ok=True);
 
 @app.get("/")
 def root():
@@ -55,3 +57,22 @@ def run_plugin(plugin_name: str):
 @app.post("/jobs/{job_name}")
 def run_job(job_name: str, background: BackgroundTasks):
     return jobs.run(job_name, background_tasks);
+
+@app.get("/sync/map")
+def get_sync_map():
+    return Metadata.scan_storage(BASE_DIR)
+
+@app.post("/sync/push")
+async def sync_push(
+    file: UploadFile = File(...), 
+    rel_path: str = Header(...)
+):
+    from core.security import Security
+    target_path = Security.get_safe_path(BASE_DIR, rel_path)
+    
+    os.makedirs(os.path.dirname(target_path), exist_ok=True)
+    
+    with open(target_path, "wb") as buffer:
+        shutil.copyfileobj(file.file, buffer)
+    
+    return {"status": "synced", "path": rel_path};
