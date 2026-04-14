@@ -55,3 +55,12 @@ async def get_storage():
         "free": round(free / (1024**3), 1),   # в ГБ
         "percent": percent
     }
+
+@app.get("/sync/view/{filename}")
+async def view_file(filename: str):
+    file_path = FILES_DIR / filename
+    if not file_path.exists():
+        raise HTTPException(status_code=404, detail="File not found")
+    
+    with open(file_path, "r", encoding="utf-8") as f:
+        return {"content": f.read()}
