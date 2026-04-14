@@ -1,1 +1,0 @@
-Sloth is alive! Syncing from Android to WSL.
