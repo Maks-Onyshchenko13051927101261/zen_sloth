@@ -1,127 +1,99 @@
 /* Базові налаштування */
-body { 
-    background: #000; 
-    color: #00e676; 
-    font-family: 'Courier New', monospace; 
-    padding: 20px; 
-    /* Додаємо динамічний відступ під камеру/статус-бар */
-    padding-top: calc(20px + env(safe-area-inset-top));
+body {
+    background-color: #000;
+    color: #00e676; /* Той самий зелений */
+    font-family: 'Courier New', Courier, monospace;
     margin: 0;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 100vh;
+    overflow-x: hidden;
 }
 
-/* Ефект старого монітора */
-body::after {
+/* Статистика зверху */
+.stats-line {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #113311;
+    padding-bottom: 5px;
+}
+
+/* Контейнер */
+.container {
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Годинник */
+#clock {
+    font-size: 3rem;
+    text-align: center;
+    margin: 20px 0;
+    text-shadow: 0 0 10px #00e676;
+}
+
+/* Панель моніторингу */
+#stats-panel {
+    border: 1px solid #00e676;
+    padding: 15px;
+    background: rgba(0, 20, 0, 0.5);
+    box-shadow: inset 0 0 10px #004400;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+}
+
+/* Кнопки (Команди) */
+.cmd {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    text-align: center;
+    text-decoration: none;
+    color: #00e676;
+    border: 1px solid #00e676;
+    background: transparent;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    box-sizing: border-box;
+}
+.cmd-group {
+    display: flex;
+    gap: 10px; 
+    width: 100%;
+}
+
+.cmd-group .cmd {
+    flex: 1;
+    margin: 10px 0;
+}
+
+.cmd:active {
+    background: #00e676;
+    color: #000;
+    box-shadow: 0 0 20px #00e676;
+}
+
+/* Ефект сканування (CRTs стайл) */
+body::before {
     content: " ";
     display: block;
     position: fixed;
     top: 0; left: 0; bottom: 0; right: 0;
-    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
-                linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
-    z-index: 10;
-    background-size: 100% 3px, 3px 100%;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    z-index: 2;
+    background-size: 100% 2px, 3px 100%;
     pointer-events: none;
 }
 
-.container { 
-    width: 90%; 
-    max-width: 400px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    padding-bottom: 20px;
-}
-
-/* Додай це, щоб посилання-команди виглядали як блоки */
-.cmd {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 35px; /* Фіксована висота, щоб не розповзалися */
-    border: 1px solid #00ff00;
-    background: rgba(0, 255, 0, 0.05);
-    color: #00ff00;
-    text-decoration: none;
-    font-family: monospace;
-    font-size: 12px;
-    letter-spacing: 2px;
-    transition: all 0.2s;
-}
-
-#clock {
-    grid-column: span 2;
-    text-align: center;
-    font-size: 3.5rem;
-    font-weight: bold;
-    margin: 10px 0 20px 0;
-    border: 2px solid #00e676;
-    padding: 10px;
-    background: rgba(0, 230, 118, 0.02);
-    box-shadow: 0 0 15px rgba(0, 230, 118, 0.3);
-    text-shadow: 0 0 8px #00e676;
-    border-radius: 4px;
-}
-
-.status {
-    font-size: 0.75rem;
-    margin-bottom: 5px;
-    width: 100%;
-    text-align: left;
-    grid-column: span 2;
-    opacity: 0.8;
-    letter-spacing: 1px;
-}
-
+/* Заголовки */
 h3 {
-    grid-column: span 2;
-    margin: 15px 0 10px 0;
-    border-bottom: 1px solid rgba(0, 230, 118, 0.3);
+    border-bottom: 1px solid #00e676;
     padding-bottom: 5px;
-    font-size: 1rem;
-}
-
-.cmd { 
-    display: flex; 
-    align-items: center; 
-    justify-content: center;
-    padding: 12px; 
-    border: 1px solid #00e676; 
-    text-decoration: none; 
-    color: #00e676; 
-    text-align: center; 
-    border-radius: 2px; 
-    transition: 0.1s;
-    text-transform: uppercase;
-    font-weight: bold;
-    font-size: 0.8rem;
-    background: rgba(0, 230, 118, 0.05);
-}
-
-.cmd:active { 
-    background: #00e676; 
-    color: #000; 
-    box-shadow: 0 0 20px #00e676;
-    transform: translateY(2px);
-}
-
-.full-width {
-    grid-column: span 2;
-}
-
-.stats-line {
-    width: 100%;
-    max-width: 400px;
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.7rem;
-    color: #00e676;
-    margin-bottom: 15px;
-    border-bottom: 1px dashed rgba(0, 230, 118, 0.2);
-    padding: 5px 10px;
-    box-sizing: border-box;
-    opacity: 0.7;
+    margin-top: 30px;
 }

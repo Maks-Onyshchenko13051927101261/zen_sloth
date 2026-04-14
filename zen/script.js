@@ -1,19 +1,24 @@
 async function checkServerStatus() {
     const statusElement = document.getElementById("status-line");
-    try{
-        const statusElement = await fetch("http://192.168.137.110:8000/status");
+    try {
+        const response = await fetch(`http://${SERVER_IP}/status`);
         const data = await response.json();
 
-        if (data.status === "Vibing" || data.system === "ZEN_SLOTH") {
+        if (data.status === "online" || data.system === "sloth") {
             console.log("Sloth is awake!🦥");
-            if (statusElement) statusElement.innerText = "SERVER: ONLINE [LOCAL]";
+            if (statusElement) {
+                statusElement.innerText = "SRV: ONLINE";
+                statusElement.style.color = "#00ff00"; // Робимо зеленим, коли онлайн
+            }
         }
     } catch(error) {
-        console.log("Sloth is sleeping... (Server offline)");
-        if (statusElement) statusElement.innerText = "SERVER: OFFLINE";
+        console.log("Sloth is sleeping...");
+        if (statusElement) {
+            statusElement.innerText = "SRV: OFFLINE";
+            statusElement.style.color = "#555";
+        }
     }
 }
-
 window.onload = () => {
     checkServerStatus();
 // Оновлення годинника
