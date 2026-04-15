@@ -1,6 +1,6 @@
 import os
 import shutil
-from fastapi import FastAPI, HTTPException, UploadFile, File
+from fastapi import FastAPI, HTTPException, UploadFile, File, WebSocket, WebSocketDisconnect
 from fastapi.responses import FileResponse
 from sloth.core.config import Config
 from sloth.core.metadata import Metadata 
@@ -64,3 +64,27 @@ async def view_file(filename: str):
     
     with open(file_path, "r", encoding="utf-8") as f:
         return {"content": f.read()}
+
+@app.websocket("/ws/sync")
+async def websocket_endpoint(websocket: WebSocket):
+    await websocket.accept()
+    print("🔌 Клієнт підключився через WebSocket")
+    try:
+        while True:
+            # Чекаємо команду від клієнта (json)
+            data = await websocket.receive_text()
+            request = json.loads(data)
+            command = request.get("command")
+
+            if command == "list":
+                # Віддаємо список файлів
+                files_map = {f.name: "file_hash_here" for f in FILES_DIR.iterdir() if f.is_file()}
+                await websocket.send_json({"type": "list", "data": files_map})
+
+            elif command == "ping":
+                await websocket.send_json({"type": "pong", "message": "Я на зв'язку, бро!"})
+
+            # Сюди ми потім допишемо логіку для push/pull
+            
+    except WebSocketDisconnect:
+        print("🔌 Клієнт відключився")
